@@ -9,9 +9,12 @@
     'A' = 1 u 11
 */
 
-let   deck       = []                   // Creamos la baraja de cartas
+let deck         = []                   // Creamos la baraja de cartas
 const tipos      = ['C', 'D', 'H', 'S'] // Creamos los tipos
 const especiales = ['A', 'J', 'Q', 'K'] // Creamos las cartas especiales
+
+let puntosJugador = 0
+    puntosComputadora = 0
 
 // Referencias HTML
 const btnPedir = document.querySelector('#btnPedir')
@@ -78,9 +81,16 @@ const valorCarta = ( carta ) => {
 // Extraemos el valor de la carta aleatoria
 const valor = valorCarta(pedirCarta())
 
-// Eventos
+/* Eventos */
+
+// Evento pedir carta
 btnPedir.addEventListener('click', () => {
-    console.log('click')
+
+    const carta = pedirCarta()
+    puntosJugador = puntosJugador + valorCarta(carta)
+    score = document.get
+    
+
 })
 
 
