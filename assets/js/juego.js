@@ -9,10 +9,12 @@
     'A' = 1 u 11
 */
 
-
 let   deck       = []                   // Creamos la baraja de cartas
 const tipos      = ['C', 'D', 'H', 'S'] // Creamos los tipos
 const especiales = ['A', 'J', 'Q', 'K'] // Creamos las cartas especiales
+
+// Referencias HTML
+const btnPedir = document.querySelector('#btnPedir')
 
 // Función para crear y mezclar la baraja
 const crearDeck = () => {
@@ -43,9 +45,6 @@ const pedirCarta = () => {
 
     // Removemos la última carta de la baraja
     const carta = deck.pop()
-
-    console.log(deck) 
-    console.log('La carta es ' + carta) // carta debe ser de la baraja
     return carta
 }
 // pedirCarta()    
@@ -78,7 +77,11 @@ const valorCarta = ( carta ) => {
 
 // Extraemos el valor de la carta aleatoria
 const valor = valorCarta(pedirCarta())
-console.log('El valor es ' + valor)
+
+// Eventos
+btnPedir.addEventListener('click', () => {
+    console.log('click')
+})
 
 
 
