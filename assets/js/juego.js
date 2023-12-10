@@ -3,10 +3,14 @@
     2D - Two of diamonds
     2H - Two of hearts
     2S - Two of shades
+
+    'J', 'Q', 'K' = 10
+
+    'A' = 1 u 11
 */
 
 
-let deck         = []                   // Creamos la baraja de cartas
+let   deck       = []                   // Creamos la baraja de cartas
 const tipos      = ['C', 'D', 'H', 'S'] // Creamos los tipos
 const especiales = ['A', 'J', 'Q', 'K'] // Creamos las cartas especiales
 
@@ -23,7 +27,7 @@ const crearDeck = () => {
         }
     }
     deck = _.shuffle(deck)
-    console.log(deck) 
+    // console.log(deck) 
     return deck
 }
 crearDeck()
@@ -44,7 +48,39 @@ const pedirCarta = () => {
     console.log(carta) // carta debe ser de la baraja
     return carta
 }
-pedirCarta()    
+// pedirCarta()    
+
+// Esta función determina el valor numérico de cada carta
+const valorCarta = ( carta ) => {
+    // Trabajamos el string como un arreglo
+    // 📌 substring - Sirve para cortar un arreglo
+    const valor = carta.substring(0, carta.length - 1)
+
+    /* Forma corta */
+    // condición ? valorSiCierto : valorSiFalso
+    return (isNaN(valor)) ?        // Condición: Si el valor no es número
+        (valor === 'A') ? 11 : 10  // True (No es número) => Es A ? Si es A vale 11 : Si no es A vale 10.
+        : valor * 1                // Flase (Es número)
+
+    /* Forma larga
+    
+    if(isNaN(valor)){
+        // Nos es número
+        // Si el valor es A, devuelve 11. Si no es A, devuelve 10
+        puntos = ( valor === 'A') ? 11 : 10;
+        return puntos
+    } else {
+        // Es número
+        puntos = valor * 1 // Convertimos el string a un número
+        return puntos
+    } */
+}
+
+// Extraemos el valor de la carta aleatoria
+const valor = valorCarta(pedirCarta())
+console.log(valor)
+
+
 
 
 
