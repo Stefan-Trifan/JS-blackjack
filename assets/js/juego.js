@@ -18,6 +18,7 @@ let puntosJugador = 0
 
 // Referencias HTML
 const btnPedir = document.querySelector('#btnPedir')
+const puntosHTML = document.querySelectorAll()
 
 // Función para crear y mezclar la baraja
 const crearDeck = () => {
@@ -85,10 +86,10 @@ const valor = valorCarta(pedirCarta())
 
 // Evento pedir carta
 btnPedir.addEventListener('click', () => {
-
     const carta = pedirCarta()
     puntosJugador = puntosJugador + valorCarta(carta)
-    score = document.get
+    
+
     
 
 })
