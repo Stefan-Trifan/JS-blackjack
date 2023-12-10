@@ -45,7 +45,7 @@ const pedirCarta = () => {
     const carta = deck.pop()
 
     console.log(deck) 
-    console.log(carta) // carta debe ser de la baraja
+    console.log('La carta es ' + carta) // carta debe ser de la baraja
     return carta
 }
 // pedirCarta()    
@@ -78,7 +78,7 @@ const valorCarta = ( carta ) => {
 
 // Extraemos el valor de la carta aleatoria
 const valor = valorCarta(pedirCarta())
-console.log(valor)
+console.log('El valor es ' + valor)
 
 
 
