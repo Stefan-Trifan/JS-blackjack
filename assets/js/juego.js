@@ -19,6 +19,7 @@ let puntosJugador = 0,
 // Referencias HTML
 const btnPedir   = document.querySelector('#btnPedir')
 const btnDetener = document.querySelector('#btnDetener')
+const btnNuevo   = document.querySelector('#btnNuevo')
 const puntosHTML = document.querySelectorAll('small')
 const divCartasComputadora = document.querySelector('#computadora-cartas')
 const divCartasJugador     = document.querySelector('#jugador-cartas')
@@ -118,9 +119,9 @@ const turnoComputadora = ( puntosMinimos ) => {
         } else if ( puntosMinimos > 21 ){
             alert('Computadora gana')
         } else if ( puntosComputadora > 21){
-            alert('Jugador Gana')
+            alert('Felicidades!! Has ganado')
         } else {
-            alert('Computadora gana')
+            alert('Perdiste!! Computadora gana')
         }
     }, 10)
 
@@ -148,12 +149,10 @@ btnPedir.addEventListener('click', () => {
 
     // Comprobamos los puntos del jugador
     if( puntosJugador > 21){
-        alert('Lo siento mucho, perdiste')
         btnPedir.disabled = true
         btnPedir.disabled = true
         turnoComputadora( puntosJugador )
     } else if (puntosJugador === 21){
-        alert('21, genial!')
         btnPedir.disabled = true
         btnPedir.disabled = true
         turnoComputadora( puntosJugador )
@@ -167,7 +166,28 @@ btnDetener.addEventListener('click', () => {
     turnoComputadora( puntosJugador )
 })
 
+// Empezar nuevo juego
+btnNuevo.addEventListener('click', () => {
 
+    // Crear nueva bataja
+    deck = []
+    deck = crearDeck()
+    console.log(deck)
+
+    puntosJugador = 0
+    puntosComputadora = 0
+
+    puntosHTML[0].innerText = 0
+    puntosHTML[1].innerText = 0
+    
+    divCartasComputadora.innerHTML = ''
+    divCartasJugador.innerHTML = ''
+
+    btnPedir.disabled = false
+    btnDetener.disabled = false
+
+
+})
 
 
 
