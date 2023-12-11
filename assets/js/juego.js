@@ -13,12 +13,15 @@ let deck         = []                   // Creamos la baraja de cartas
 const tipos      = ['C', 'D', 'H', 'S'] // Creamos los tipos
 const especiales = ['A', 'J', 'Q', 'K'] // Creamos las cartas especiales
 
-let puntosJugador = 0
+let puntosJugador = 0,
     puntosComputadora = 0
 
 // Referencias HTML
-const btnPedir = document.querySelector('#btnPedir')
+const btnPedir   = document.querySelector('#btnPedir')
+const btnDetener = document.querySelector('#btnDetener')
 const puntosHTML = document.querySelectorAll('small')
+const divCartasComputadora = document.querySelector('#computadora-cartas')
+const divCartasJugador     = document.querySelector('#jugador-cartas')
 
 // Función para crear y mezclar la baraja
 const crearDeck = () => {
@@ -59,11 +62,12 @@ const valorCarta = ( carta ) => {
     // 📌 substring - Sirve para cortar un arreglo
     const valor = carta.substring(0, carta.length - 1)
 
-    /* Forma corta */
+    /* Forma corta 
+    Si la carta no es número */
     // condición ? valorSiCierto : valorSiFalso
     return (isNaN(valor)) ?        // Condición: Si el valor no es número
-        (valor === 'A') ? 11 : 10  // True (No es número) => Es A ? Si es A vale 11 : Si no es A vale 10.
-        : valor * 1                // Flase (Es número)
+        (valor === 'A') ? 11 : 10  // True (No es número) => El valor es A ? Si es A vale 11 : Si no es A vale 10.
+        : valor * 1                // Flase (Es número,)
 
     /* Forma larga
     
@@ -82,16 +86,74 @@ const valorCarta = ( carta ) => {
 // Extraemos el valor de la carta aleatoria
 const valor = valorCarta(pedirCarta())
 
-/* Eventos */
+// Turno de la computadora
+const turnoComputadora = ( puntosMinimos ) => {
+    do {
+        // Pedimos carta
+        const carta = pedirCarta()
 
-// Evento pedir carta
+        // Sumamos puntos de la carta
+        puntosComputadora = puntosComputadora + valorCarta(carta)
+
+        // Mostramos puntos en el DOM
+        puntosHTML[1].innerText = puntosComputadora
+        
+        // Creamos carta
+        const imgCarta = document.createElement('img')
+        imgCarta.src = `assets/cartas/${ carta }.png`
+        imgCarta.classList.add('carta')
+
+        // Insertamos la carta
+        divCartasComputadora.append(imgCarta)
+
+        if(puntosMinimos > 21){
+            break
+        }
+
+    } while ((puntosComputadora < puntosMinimos) && (puntosMinimos <= 21))
+
+
+}
+
+
+// Evento pedir carta Usuario
 btnPedir.addEventListener('click', () => {
+    // Pedimos carta
     const carta = pedirCarta()
+
+    // Sumamos puntos de la carta
     puntosJugador = puntosJugador + valorCarta(carta)
-    
+
+    // Mostramos puntos en el DOM
     puntosHTML[0].innerText = puntosJugador
     
+    // Creamos carta
+    const imgCarta = document.createElement('img')
+    imgCarta.src = `assets/cartas/${ carta }.png`
+    imgCarta.classList.add('carta')
 
+    // Insertamos la carta
+    divCartasJugador.append(imgCarta)
+
+    // Comprobamos los puntos del jugador
+    if( puntosJugador > 21){
+        alert('Lo siento mucho, perdiste')
+        btnPedir.disabled = true
+        btnPedir.disabled = true
+        turnoComputadora( puntosJugador )
+    } else if (puntosJugador === 21){
+        alert('21, genial!')
+        btnPedir.disabled = true
+        btnPedir.disabled = true
+        turnoComputadora( puntosJugador )
+    } 
+}) 
+
+btnDetener.addEventListener('click', () => {
+    btnDetener.disabled = true
+    btnPedir.disabled = true
+
+    turnoComputadora( puntosJugador )
 })
 
 
