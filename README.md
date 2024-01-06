@@ -1,4 +1,4 @@
-# Blackjack
+# Blackjack (v1.0.0)
 
 ### Ir al Sitio Web: [https://stefan-trifan.github.io/blackjack/](https://stefan-trifan.github.io/blackjack/)
 
